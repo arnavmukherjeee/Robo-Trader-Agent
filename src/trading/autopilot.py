@@ -1,10 +1,10 @@
 """Autopilot — fully autonomous trading engine.
 
 Runs a continuous loop with zero human interaction:
-  1. RESEARCH   (every 30 min) — backtest strategies across all symbols, pick top 5
-  2. SIGNAL     (every 5 min)  — evaluate top strategies on live data, execute trades
-  3. MANAGE     (every 1 min)  — monitor positions, enforce TP/SL/time exits
-  4. REPORT     (continuous)   — maintain in-memory state for the dashboard
+  1. RESEARCH   (every 10s)   — backtest strategies across all symbols, pick top 5
+  2. SIGNAL     (every 5s)    — evaluate top strategies on live data, execute trades
+  3. MANAGE     (every 2s)    — monitor positions, enforce TP/SL/time exits
+  4. REPORT     (continuous)  — maintain in-memory state for the dashboard
 """
 
 from __future__ import annotations
@@ -36,9 +36,9 @@ ALL_SYMBOLS = CRYPTO_SYMBOLS + EQUITY_SYMBOLS
 
 # ── Timing constants (seconds) ─────────────────────────────────────────────────
 
-RESEARCH_INTERVAL = 30 * 60      # 30 minutes
-SIGNAL_INTERVAL = 5 * 60         # 5 minutes
-MANAGE_INTERVAL = 60             # 1 minute
+RESEARCH_INTERVAL = 10             # 10 seconds
+SIGNAL_INTERVAL = 5                # 5 seconds
+MANAGE_INTERVAL = 2                # 2 seconds
 
 # ── Position management thresholds ─────────────────────────────────────────────
 
@@ -186,7 +186,7 @@ class Autopilot:
         logger.info(f"  Symbols: {', '.join(ALL_SYMBOLS)}")
         logger.info(f"  Position size: {POSITION_SIZE_PCT:.0%} | Max positions: {MAX_POSITIONS}")
         logger.info(f"  TP: {TAKE_PROFIT_PCT:.1%} | SL: {STOP_LOSS_PCT:.1%}")
-        logger.info(f"  Research every {RESEARCH_INTERVAL // 60}m | Signals every {SIGNAL_INTERVAL // 60}m")
+        logger.info(f"  Research every {RESEARCH_INTERVAL}s | Signals every {SIGNAL_INTERVAL}s | Manage every {MANAGE_INTERVAL}s")
         logger.info("=" * 70)
 
         account = self.alpaca.get_account()

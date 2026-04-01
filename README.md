@@ -17,9 +17,9 @@ Built with Python, Alpaca Markets, and Claude AI.
 
 The platform runs a fully autonomous loop:
 
-1. **Research** — Every 30 minutes, generates thousands of strategy combinations from 11 technical signal types, backtests them against 365 days of historical data, and ranks by Sharpe ratio
-2. **Signal** — Every 5 minutes, evaluates top-performing strategies against live market data and fires trades when signals align
-3. **Manage** — Every minute, monitors open positions for take-profit, stop-loss, and time-based exits
+1. **Research** — Every 10 seconds, generates thousands of strategy combinations from 11 technical signal types, backtests them against 365 days of historical data, and ranks by Sharpe ratio
+2. **Signal** — Every 5 seconds, evaluates top-performing strategies against live market data and fires trades when signals align
+3. **Manage** — Every 2 seconds, monitors open positions for take-profit, stop-loss, and time-based exits
 4. **Report** — Continuously serves real-time state to the web dashboard
 
 No buttons to press. No decisions to make. Just start it and let it run.
